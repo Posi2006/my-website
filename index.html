@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Interactive Site</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        form { display: inline-block; text-align: left; background: #f4f4f4; padding: 20px; border-radius: 8px; }
+        input, textarea { display: block; width: 100%; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>Send me a message below:</p>
+
+    <form action="https://formspree.io/f/xojkqedg" method="POST">
+        <label>Your Email:</label>
+        <input type="email" name="email" required>
+        
+        <label>Message:</label>
+        <textarea name="message" required></textarea>
+        
+        <button type="submit">Send to Me</button>
+    </form>
+</body>
+</html>
